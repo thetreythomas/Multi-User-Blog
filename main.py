@@ -18,9 +18,6 @@
 import os
 import jinja2
 import webapp2
-import signup.Signup
-
-
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
@@ -43,9 +40,9 @@ class MainPage(Handler):
         items = self.request.get_all("food")
         self.render("shopping-list.html", items = items)
 
-# class Signup(Handler):
-#     def get(self):
-#         self.render("user-signup.html")
+class Signup(Handler):
+    def get(self):
+        self.render("user-signup.html")
 
 
 app = webapp2.WSGIApplication([('/', MainPage),
