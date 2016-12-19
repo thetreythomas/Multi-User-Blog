@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="post" class="form-horizontal">
+
+<div class="container">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h2>/ascii/</h2>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="title">Title</label>
+  <div class="col-md-4">
+  <input id="title" name="title" type="text" class="form-control input-md" value="{{ title }}">
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="art">Art</label>
+  <div class="col-md-4">
+    <textarea id="art" name="art" rows="15" class="form-control">{{ art }}</textarea>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="submit">Submit</label>
+  <div class="col-md-2">
+    <button id="submit" name="submit" class="btn btn-primary">Submit</button>
+  </div>
+  <div class="col-md-2 error">
+      {{ error }}
+  </div>
+</div>
+
+</form>
+
+{% endblock%}
