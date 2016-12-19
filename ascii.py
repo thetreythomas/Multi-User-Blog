@@ -1,9 +1,14 @@
 from handler import Handler
 from databases import Art
 
+# This is needed for the db queries and inserts
+from google.appengine.ext import db
+
 class Ascii(Handler):
     def render_front(self, title="", art="", error=""):
-        self.render("ascii.html", title=title, art=art, error=error)
+        arts = db.GqlQuery("SELECT * FROM Art ORDER BY created DESC")
+
+        self.render("ascii.html", title=title, art=art, error=error, arts = arts)
 
     def get(self):
         self.render_front()

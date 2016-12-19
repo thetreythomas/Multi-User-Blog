@@ -20,6 +20,7 @@ import webapp2
 from signup import Signup, Welcome
 from handler import Handler
 from ascii import Ascii
+from blog import BlogFront, PostPage, NewPost
 
 
 class MainPage(Handler):
@@ -31,5 +32,8 @@ class MainPage(Handler):
 app = webapp2.WSGIApplication([('/', MainPage),
                                ('/signup', Signup),
                                ('/welcome', Welcome),
-                               ('/ascii', Ascii)
+                               ('/ascii', Ascii),
+                               ('/blog', BlogFront),
+                               ('/blog/([0-9]+)', PostPage),
+                               ('/blog/newpost', NewPost),
                                ], debug=True)
