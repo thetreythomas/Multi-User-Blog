@@ -1,35 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Blog</title>
-</head>
-<body>
-    <h1>Blog</h1>
+{% extends "base.html" %}
 
-    <form method="post">
-    <label>
-        <div>Subject</div>
-        <input type="text" name="subject" value={{subject}}>
-    </label>
+{% block content %}
 
-    <label>
-        <div>Content</div>
-        <textarea name="content">{{content}}</textarea>
-    </label>
+    {% for p in posts %}
+        {{ p.renderPosts() | safe }}
+        <br>
+        <br>
+    {% endfor %}
 
-    <div class="error" value={{error}}>{{error}}</div>
-    <input type="submit" name="submit">
-
-    </form>
-
-<hr>
-
-{% for art in arts %}
-    <div class="blog">
-        <div class="blog-title">{{blog.subject}}</div>
-        <pre class="blog-body">{{blog.content}}</pre>
-    </div>
-{% endfor %}
-
-</body>
-</html>
+{% endblock%}
