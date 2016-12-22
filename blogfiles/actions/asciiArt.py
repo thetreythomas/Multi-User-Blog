@@ -1,5 +1,5 @@
-from handler import Handler
-from databases import Art
+from blogfiles.actions.handler import Handler
+from blogfiles.models.art import Art
 
 # This is needed for the db queries and inserts
 from google.appengine.ext import db

@@ -17,11 +17,19 @@
 import os
 import jinja2
 import webapp2
-from pyfiles.signup import Signup, Welcome, Register, Login, Logout
+from blogfiles.actions.handler import Handler
+from blogfiles.actions.asciiArt import Ascii
+from blogfiles.actions.blog import BlogFront
+from blogfiles.actions.postpage import PostPage
+from blogfiles.actions.newpost import NewPost
+
+
+
+# from pyfiles.signup import Signup, Welcome, Register, Login, Logout
 #from pyfiles import signup, handler, blog, ascii
-from pyfiles.handler import Handler
-from pyfiles.ascii import Ascii
-from pyfiles.blog import BlogFront, PostPage, NewPost
+# from pyfiles.handler import Handler
+# from pyfiles.asciiArt import Ascii
+# from pyfiles.blog import BlogFront, PostPage, NewPost
 
 
 class MainPage(Handler):
@@ -31,12 +39,12 @@ class MainPage(Handler):
 
 
 app = webapp2.WSGIApplication([('/', MainPage),
-                               ('/signup', Register),
-                               ('/welcome', Welcome),
+                               # ('/signup', Register),
+                               # ('/welcome', Welcome),
                                ('/ascii', Ascii),
                                ('/blog', BlogFront),
                                ('/blog/([0-9]+)', PostPage),
                                ('/blog/newpost', NewPost),
-                               ('/login', Login),
-                               ('/logout', Logout),
+                               # ('/login', Login),
+                               # ('/logout', Logout),
                                ], debug=True)
