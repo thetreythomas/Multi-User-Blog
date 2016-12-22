@@ -1,8 +1,9 @@
-from handler import Handler
+from blogfiles.actions.handler import Handler
+from blogfiles.models.user import User
 import re
 
 from google.appengine.ext import db
-from databases import User
+
 
 USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
 def valid_username(username):
@@ -15,31 +16,6 @@ def valid_password(password):
 EMAIL_RE  = re.compile(r'^[\S]+@[\S]+\.[\S]+$')
 def valid_email(email):
     return not email or EMAIL_RE.match(email)
-
-#Functions for hashing the cookies
-SECRET = 'sinetheta=y/r'
-
-def make_secure_val(s):
-    return "%s|%s" % (s, hmac.new(SECRET, s).hexdigest())
-
-def check_secure_val(h):
-    val = h.split('|')[0]
-    if h == make_secure_val(val):
-        return val
-
-#Salt Generator
-def make_salt(length = 5):
-    return ''.join(random.choice(letters) for x in xrange(length))
-
-def make_pw_hash(name, pw, salt = None):
-    if not salt:
-        salt = make_salt()
-    h = hashlib.sha256(name + pw + salt).hexdigest()
-    return '%s,%s' % (h, salt)
-
-def valid_pw(name, pw, h):
-    salt = h.split(',')[1]
-    return h == make_pw_hash(name, pw, salt)
 
 class Signup(Handler):
 
@@ -79,42 +55,3 @@ class Signup(Handler):
 
     def done(self, *a, **kw):
         raise NotImplementedError
-
-
-class Register(Signup):
-    def done(self):
-        #This will be a check to see if the username already exists
-        u = User.by_name(self.username)
-        if u:
-            msg = 'That user already exists. Please enter a different username.'
-            self.render('user-signup.html', error_username = msg)
-        else:
-            u = User.register(self.username, self.password, self.email)
-            u.put()
-
-            self.login(u)
-            self.redirect('/blog')
-
-
-class Login(Handler):
-    def get(self):
-        self.render('login.html')
-
-
-class Logout(Handler):
-    def get(self):
-        self.logout()
-        self.redirect('/blog')
-
-
-class Welcome(Handler):
-    def get(self):
-        username = self.request.get('username')
-        if valid_username(username):
-            self.render('welcome.html', username = username)
-        else:
-            self.redirect('/signup')
-
-
-
-

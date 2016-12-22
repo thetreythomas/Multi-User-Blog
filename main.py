@@ -22,6 +22,8 @@ from blogfiles.actions.asciiArt import Ascii
 from blogfiles.actions.blog import BlogFront
 from blogfiles.actions.postpage import PostPage
 from blogfiles.actions.newpost import NewPost
+from blogfiles.actions.welcome import Welcome
+from blogfiles.actions.register import Register
 
 
 
@@ -39,8 +41,8 @@ class MainPage(Handler):
 
 
 app = webapp2.WSGIApplication([('/', MainPage),
-                               # ('/signup', Register),
-                               # ('/welcome', Welcome),
+                               ('/signup', Register),
+                               ('/welcome', Welcome),
                                ('/ascii', Ascii),
                                ('/blog', BlogFront),
                                ('/blog/([0-9]+)', PostPage),
