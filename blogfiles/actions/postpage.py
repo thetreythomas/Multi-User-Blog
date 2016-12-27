@@ -3,8 +3,8 @@ from blogfiles.models.post import Post
 
 from google.appengine.ext import db
 
-def blog_key(name = 'default'):
-    return db.Key.from_path('blogs', name)
+# def blog_key(name = 'default'):
+#     return db.Key.from_path('blogs', name)
 
 class PostPage(Handler):
     def get(self, post_id):

@@ -1,4 +1,4 @@
-from blogfiles.actions.handler import Handler
+from blogfiles.actions import Handler
 
 class Logout(Handler):
     def get(self):

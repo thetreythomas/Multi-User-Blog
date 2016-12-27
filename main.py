@@ -24,6 +24,8 @@ from blogfiles.actions.postpage import PostPage
 from blogfiles.actions.newpost import NewPost
 from blogfiles.actions.welcome import Welcome
 from blogfiles.actions.register import Register
+from blogfiles.actions.login import Login
+from blogfiles.actions.logout import Logout
 
 
 
@@ -47,6 +49,6 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                ('/blog', BlogFront),
                                ('/blog/([0-9]+)', PostPage),
                                ('/blog/newpost', NewPost),
-                               # ('/login', Login),
-                               # ('/logout', Logout),
+                               ('/login', Login),
+                               ('/logout', Logout),
                                ], debug=True)

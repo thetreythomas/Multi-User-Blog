@@ -4,13 +4,15 @@ import os
 
 from google.appengine.ext import db
 
+from blogfiles.actions.validate import *
+from blogfiles.models.user import User
+
 #from databases import User
 
 #template_dir = os.path.join(os.path.dirname(__file__), 'templates/')
 template_dir = os.path.join(os.getcwd(), 'templates/')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
                                autoescape = True)
-
 
 
 class Handler(webapp2.RequestHandler):
@@ -40,8 +42,8 @@ class Handler(webapp2.RequestHandler):
     def logout(self):
         self.response.headers.add_header('Set-Cookie', 'user_id=; Path=/')
 
-    # def initialize(self, *a, **kw):
-    #     webapp2.RequestHandler.initialize(self, *a, **kw)
-    #     uid = self.read_secure_cookie('user_id')
-    #     self.user = uid and User.by_id(int(uid))
+    def initialize(self, *a, **kw):
+        webapp2.RequestHandler.initialize(self, *a, **kw)
+        uid = self.read_secure_cookie('user_id')
+        self.user = uid and User.by_id(int(uid))
 

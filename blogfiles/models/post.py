@@ -1,5 +1,4 @@
-from blogfiles.actions.handler import Handler
-
+#from blogfiles.actions.handler import Handler
 from google.appengine.ext import db
 
 
@@ -15,4 +14,4 @@ class Post(db.Model):
 
     def renderPosts(self):
         self._render_text = self.content.replace('\n', '<br>')
-        return Handler().render_str("post.html", p =self)
+        return render_str("post.html", p =self)

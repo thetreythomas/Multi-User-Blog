@@ -1,4 +1,5 @@
 from blogfiles.actions.signup import Signup
+from blogfiles.models.user import User
 
 class Register(Signup):
     def done(self):
