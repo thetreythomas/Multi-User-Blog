@@ -11,10 +11,11 @@ class Login(Handler):
         password = self.request.get('password')
 
         u = User.login(username, password)
+        print u
         if u:
             self.login(u)
-            self.redirect('/welcome?username=' + username)
-            #self.redirect('/blog')
+            #self.redirect('/welcome?username=' + username)
+            self.redirect('/blog')
         else:
             msg = 'Invalid Login'
             self.render('login.html', error = msg)

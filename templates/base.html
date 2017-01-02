@@ -23,11 +23,11 @@
             <div class="col-md-8">
                 <nav>
                     <ul>
-                        {% if user%}
-                        Logged in as : <span class="loggedIn">{{ user.name }}</span> //
+                        {% if user %}
+                        Logged in as : <span class="loggedIn">{{ user.name }}</span>
                         <li><a href="/blog/myposts">My Posts</a></li>
-                        <li><a href="/blog/newpost"></a>New Post</li>
-                        <li><a href="/logout"></a>Logout</li>
+                        <li><a href="/blog/newpost">New Post</a></li>
+                        <li><a href="/logout">Logout</a></li>
                         {% else %}
                         <li><a href="/login">Login</a></li>
                         <li><a href="/signup">Signup</a></li>

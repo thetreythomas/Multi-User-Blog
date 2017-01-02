@@ -2,10 +2,40 @@
 
 {% block content %}
 
-    {% for p in posts %}
-        {{ p.renderPosts() | safe }}
+    {% if post == Null %}
         <br>
         <br>
+        <br>
+        <div class="post-title">
+          There are no current posts.
+        </div>
+    {% endif %}
+
+
+    {% for post in posts %}
+    <div class="post">
+
+      <div class="post-heading">
+
+        <div class="post-title">
+          {{post.subject}}
+        </div>
+
+        <div>
+            <a href="/blog/{{ post.key().id() }}">{{ post.subject }}</a>
+        </div>
+
+        <div class="post-date">
+          {{post.created.strftime("%b %d, %Y")}}
+        </div>
+
+      </div>
+
+      <div class="post-content">
+        {{post.subject | safe}}
+      </div>
+
+    </div>
     {% endfor %}
 
 {% endblock%}

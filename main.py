@@ -27,15 +27,6 @@ from blogfiles.actions.register import Register
 from blogfiles.actions.login import Login
 from blogfiles.actions.logout import Logout
 
-
-
-# from pyfiles.signup import Signup, Welcome, Register, Login, Logout
-#from pyfiles import signup, handler, blog, ascii
-# from pyfiles.handler import Handler
-# from pyfiles.asciiArt import Ascii
-# from pyfiles.blog import BlogFront, PostPage, NewPost
-
-
 class MainPage(Handler):
     def get(self):
         items = self.request.get_all("food")

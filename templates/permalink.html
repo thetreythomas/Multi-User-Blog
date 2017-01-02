@@ -1,5 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-  {{post.renderPosts() | safe}}
+
+    <div class="post">
+
+      <div class="post-heading">
+
+        <div class="post-title">
+          {{post.subject}}
+        </div>
+
+        <div class="post-date">
+          {{post.created.strftime("%b %d, %Y")}}
+        </div>
+
+      </div>
+
+      <div class="post-content">
+        {{post.subject | safe}}
+      </div>
+
+      <div class="post-user">
+        Created by : {{ post.user.name }}
+      </div>
+
+    </div>
+
 {% endblock %}

@@ -1,10 +1,11 @@
-from blogfiles.actions.handler import Handler
+from handler import Handler
 from blogfiles.models.post import Post
+from blogfiles.models.user import User
 
 from google.appengine.ext import db
 
-# def blog_key(name = 'default'):
-#     return db.Key.from_path('blogs', name)
+def blog_key(name = 'default'):
+    return db.Key.from_path('blogs', name)
 
 class PostPage(Handler):
     def get(self, post_id):

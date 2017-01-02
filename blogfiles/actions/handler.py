@@ -21,6 +21,7 @@ class Handler(webapp2.RequestHandler):
 
     def render_str(self, template, **params):
         t = jinja_env.get_template(template)
+        params['user'] = self.user
         return t.render(params)
 
     def render(self, template, **kw):
@@ -46,4 +47,3 @@ class Handler(webapp2.RequestHandler):
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')
         self.user = uid and User.by_id(int(uid))
-
