@@ -26,6 +26,7 @@ from blogfiles.actions.welcome import Welcome
 from blogfiles.actions.register import Register
 from blogfiles.actions.login import Login
 from blogfiles.actions.logout import Logout
+from blogfiles.actions.editpost import EditPost
 
 class MainPage(Handler):
     def get(self):
@@ -39,6 +40,7 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                ('/ascii', Ascii),
                                ('/blog', BlogFront),
                                ('/blog/([0-9]+)', PostPage),
+                               ('/blog/([0-9]+)/editpost', EditPost),
                                ('/blog/newpost', NewPost),
                                ('/login', Login),
                                ('/logout', Logout),

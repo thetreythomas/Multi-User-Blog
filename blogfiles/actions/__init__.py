@@ -11,3 +11,4 @@ from register import Register
 from signup import Signup
 from validate import *
 from welcome import Welcome
+from editpost import EditPost

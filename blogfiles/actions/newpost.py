@@ -9,7 +9,10 @@ def blog_key(name = 'default'):
 
 class NewPost(Handler):
     def get(self):
-        self.render("newpost.html")
+        if self.user:
+            self.render("newpost.html")
+        else:
+            self.redirect("/signup")
 
     def post(self):
         subject = self.request.get("subject")

@@ -17,7 +17,7 @@
       </div>
 
       <div class="post-content">
-        {{post.subject | safe}}
+        {{post.content | safe}}
       </div>
 
       <div class="post-user">
@@ -25,5 +25,15 @@
       </div>
 
     </div>
+
+    {% if user %}
+      <form method="post">
+        <input type="submit" class="btn btn-default" name="edit" id="edit" value="Edit">
+        <input type="submit" class="btn btn-default" name="delete" id="delete" value="Delete">
+        <br>
+        <button type="submit" class="btn btn-default" name="editButton" id="editButton">Edit Button</button>
+        <button type="submit" class="btn btn-default" name="deleteButton" id="deleteButton">Delete Button</button>
+      </form>
+    {% endif %}
 
 {% endblock %}
