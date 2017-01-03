@@ -28,12 +28,52 @@
 
     {% if user %}
       <form method="post">
-        <input type="submit" class="btn btn-default" name="edit" id="edit" value="Edit">
-        <input type="submit" class="btn btn-default" name="delete" id="delete" value="Delete">
         <br>
-        <button type="submit" class="btn btn-default" name="editButton" id="editButton">Edit Button</button>
-        <button type="submit" class="btn btn-default" name="deleteButton" id="deleteButton">Delete Button</button>
+        <button type="submit" class="btn btn-default" name="edit" id="edit" value="edit">Edit</button>
+        <button type="submit" class="btn btn-default" name="delete" id="delete" value="delete">Delete</button>
+        <button type="submit" class="btn btn-default" name="like" id="like" value="like">Like</button>
       </form>
+      <span class="error">{{ error }}</span>
     {% endif %}
+
+    <hr>
+
+    <h2>Comments</h2>
+    <form method="post">
+    {% for comment in comments %}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel-body">
+              <strong>{{ comment.content }}</strong>
+              <br>
+              <span>Comment by {{ comment.author.name }} on {{ comment.created.strftime("%b %d, %Y") }}</span>
+            </div>
+          </div>
+          <div class="col-md-12">
+            {% if comment.author.name == user.name %}
+              <button type="submit" class="btn btn-default" name="edit_comment" id="edit_comment" value="edit_comment">Edit Comment</button>
+              <button type="submit" class="btn btn-default" name="deleteComment" id="deleteComment" value="deleteComment">Delete Comment</button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+    {% endfor %}
+
+
+
+    {% if user %}
+      <form method="post">
+        <label>Add a Comment</label>
+        <br>
+        <textarea class="form-control" name="content" id="content"></textarea>
+        <button type="submit" class="btn btn-default" name="comment" id="comment" value="comment">Add Comment</button>
+      </form>
+      <span class="error">{{ comment_error }}</span>
+
+      {% endif %}
 
 {% endblock %}

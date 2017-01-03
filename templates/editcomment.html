@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-10">
-            <h2>Edit Post</h2>
+            <h2>Edit Comment</h2>
         </div>
     </div>
 
@@ -16,22 +16,12 @@
     <form method="post" class="form-horizontal">
 
         <div class="form-group">
-            <label for="subject" class="col-sm-2 control-label">Subject :</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" id="subject" name="subject" value="{{ post.subject }}">
-            </div>
-            <div class="col-sm-4 error">
-
-            </div>
-        </div>
-
-        <div class="form-group">
             <label for="content" class="col-sm-2 control-label">Content :</label>
             <div class="col-sm-6">
-                <textarea id="content" name="content" rows="15" class="form-control">{{ post.content }}</textarea>
+                <textarea id="content" name="content" rows="15" class="form-control">{{ comment.content }}</textarea>
             </div>
             <div class="col-sm-4 error">
-                {{ error }}
+                {{ save_error }}
             </div>
         </div>
 

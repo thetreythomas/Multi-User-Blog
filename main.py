@@ -27,6 +27,7 @@ from blogfiles.actions.register import Register
 from blogfiles.actions.login import Login
 from blogfiles.actions.logout import Logout
 from blogfiles.actions.editpost import EditPost
+from blogfiles.actions.editcomment import EditComment
 
 class MainPage(Handler):
     def get(self):
@@ -44,4 +45,5 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                ('/blog/newpost', NewPost),
                                ('/login', Login),
                                ('/logout', Logout),
+                               ('/blog/([0-9]+)/([0-9]+)/editcomment', EditComment)
                                ], debug=True)
