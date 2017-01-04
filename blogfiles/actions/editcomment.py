@@ -11,7 +11,7 @@ def blog_key(name = 'default'):
 
 class EditComment(Handler):
     def get(self, postID, commentID):
-        key = db.Key.from_path('Post', int(post_id), parent = blog_key())
+        key = db.Key.from_path('Post', int(postID), parent = blog_key())
         post = db.get(key)
 
         comment = Comments.get_by_id(int(commentID))
@@ -22,12 +22,12 @@ class EditComment(Handler):
                 self.redirect("/blog/%s" % str(post.key().id()))
 
     def post(self, postID, commentID):
-        key = db.Key.from_path('Post', int(post_id), parent = blog_key())
+        key = db.Key.from_path('Post', int(postID), parent = blog_key())
         post = db.get(key)
 
         if self.request.get("save"):
             comment = Comments.get_by_id(int(commentID))
-            if comment.author.name == user.name:
+            if comment.author.name == self.user.name:
                 comment.content = self.request.get("content")
                 comment.put()
                 time.sleep(0.2)

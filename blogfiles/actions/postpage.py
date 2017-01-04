@@ -58,7 +58,7 @@ class PostPage(Handler):
                     like = Like(post = post, user = User.by_name(self.user.name))
                     like.put()
                     time.sleep(0.2)
-                    self.redirect("/blog/%s/editpost" % str(post.key().id()))
+                    self.redirect("/blog/%s" % str(post.key().id()))
 
             if self.request.get("comment"):
                 print "\n POST request for comment \n"
@@ -74,11 +74,23 @@ class PostPage(Handler):
 
             if self.request.get("deleteComment"):
                 print "\n POST request for delete comment \n"
+                commentToDeleteID = self.request.get("commentToDelete")
+                comment = Comments.get_by_id(int(commentToDeleteID))
+                if comment.author.name == self.user.name:
+                    db.delete(comment)
+                    time.sleep(0.2)
+                    self.redirect("/blog/%s" % str(post.key().id()))
+                else:
+                    delete_error = "You are not able to delete this comment."
+                    self.render("permalink.html", post = post, delete_error = comment_error)
+
+
+
 
 
             if self.request.get("edit_comment"):
                 print "\n POST request for edit comment \n"
-
+                comment = self.request.get("comment.key")
                 self.redirect('/blog/%s/%s/editcomment' % (str(post.key().id()), str(comment.key().id())) )
 
 
