@@ -5,6 +5,9 @@ from blogfiles.actions.validate import *
 #auto_now_add will add the date/time stamp when a new record is created
 #auto_now will display when the item was last updated
 
+def users_key(group = 'default'):
+        return db.Key.from_path('users', group)
+
 
 #Reference - https://cloud.google.com/appengine/docs/python/datastore/modelclass
 class User(db.Model):
@@ -12,9 +15,11 @@ class User(db.Model):
     pw_hash = db.StringProperty(required = True)
     email = db.StringProperty()
 
+
+
     @classmethod
     def by_id(cls, uid):
-        #return User.get_by_id(uid, parent = users_key())
+        return User.get_by_id(uid, parent = users_key())
         return User.get_by_id(uid)
 
     @classmethod
@@ -25,8 +30,8 @@ class User(db.Model):
     @classmethod
     def register(cls, name, pw, email = None):
         pw_hash = make_pw_hash(name, pw)
-        #return User(parent = users_key(),
-        return User(name = name,
+        return User(parent = users_key(),
+                    name = name,
                     pw_hash = pw_hash,
                     email = email)
 

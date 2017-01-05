@@ -14,6 +14,7 @@ class PostPage(Handler):
     def get(self, post_id):
         key = db.Key.from_path('Post', int(post_id), parent = blog_key())
         post = db.get(key)
+        likes = Likes.by_post(post_id)
 
         comments = Comments.get_comments_by_id(post)
 
@@ -21,7 +22,7 @@ class PostPage(Handler):
             self.error(404)
             return
 
-        self.render("permalink.html", post = post, comments = comments)
+        self.render("permalink.html", post = post, comments = comments, likes = likes)
 
     def post(self, post_id):
         key = db.Key.from_path('Post', int(post_id), parent = blog_key())
@@ -49,16 +50,19 @@ class PostPage(Handler):
                     delete_error = "Failed to delete post"
                     self.render("permalink.html", post = post, error = delete_error)
 
+
             if self.request.get("like"):
                 print "\n POST request for like \n"
                 if post.user.key().id() == User.by_name(self.user.name).key().id():
                     like_error = "You cannot like your own post"
                     self.render("permalink.html", post = post, error = like_error)
                 else:
-                    like = Like(post = post, user = User.by_name(self.user.name))
+                    #like = Likes(post = post, user = User.by_name(self.user.name))
+                    like = Likes(post = int(post_id), user = self.user.key().id())
                     like.put()
                     time.sleep(0.2)
                     self.redirect("/blog/%s" % str(post.key().id()))
+
 
             if self.request.get("comment"):
                 print "\n POST request for comment \n"
@@ -71,6 +75,7 @@ class PostPage(Handler):
                 else:
                     comment_error = "Please enter some text if you would like to leave a comment."
                     self.render("permalink.html", post = post, comment_error = comment_error)
+
 
             if self.request.get("deleteComment"):
                 print "\n POST request for delete comment \n"
@@ -85,19 +90,10 @@ class PostPage(Handler):
                     self.render("permalink.html", post = post, delete_error = comment_error)
 
 
-
-
-
             if self.request.get("edit_comment"):
                 print "\n POST request for edit comment \n"
                 comment = self.request.get("comment.key")
                 self.redirect('/blog/%s/%s/editcomment' % (str(post.key().id()), str(comment.key().id())) )
-
-
-
-
-
-
 
 
         else:

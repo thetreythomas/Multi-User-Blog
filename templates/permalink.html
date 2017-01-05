@@ -18,10 +18,16 @@
 
       <div class="post-content">
         {{post.content | safe}}
+        <br>
+        <br>
       </div>
 
       <div class="post-user">
         Created by : {{ post.user.name }}
+      </div>
+      <div class="post-likes">
+        <hr>
+        {{ likes }} people like this post.
       </div>
 
     </div>
