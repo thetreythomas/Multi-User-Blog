@@ -19,7 +19,7 @@ class NewPost(Handler):
         content = self.request.get("content").replace('\n', '<br>')
         userID = User.by_name(self.user.name)
 
-        if subject and content:
+        if subject and content and self.user:
             p = Post(parent = blog_key(),
                      subject = subject,
                      content = content,

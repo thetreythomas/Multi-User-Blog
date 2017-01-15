@@ -13,6 +13,10 @@ class EditPost(Handler):
         key = db.Key.from_path('Post', int(post_id), parent = blog_key())
         post = db.get(key)
 
+        if not post:
+            self.error(404)
+            return
+
         if self.user:
             if post.user.key().id() == User.by_name(self.user.name).key().id():
                 self.render("editpost.html", post = post)
@@ -24,6 +28,10 @@ class EditPost(Handler):
     def post(self, post_id):
         key = db.Key.from_path('Post', int(post_id), parent = blog_key())
         post = db.get(key)
+
+        if not post:
+            self.error(404)
+            return
 
         if self.request.get("save"):
             subject = self.request.get("subject")
