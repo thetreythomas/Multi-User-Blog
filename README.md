@@ -24,5 +24,5 @@ Go to http://multi-user-blog-152803.appspot.com/blog
 * Add an Existing Application and point it to the unzipped folder
 * Configure the Admin Port and the Port
 * Run the app
-* Go to http://localhost:<port>/blog, with <port> being what you configured
+* Go to http://localhost:*port*/blog, with *port* being what you configured
 * Enjoy!
